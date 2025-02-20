@@ -1,0 +1,97 @@
+---
+title: "Lab 3: COVID-19"
+subtitle: 'Ecosystem Science and Sustainability 330'
+author: Lance Lowell
+  - name: ...
+    email: ...
+format: html
+---
+
+```{r}
+library(tidyverse)
+library(flextable)
+library(zoo)
+```
+
+
+# Question 1
+
+```{r}
+data_url <- "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv"
+
+covid_data <- read_csv(data_url)
+
+head(covid_data)
+
+```
+
+## Question 2
+```{r}
+txt <- "2022-02-01"
+class (txt)
+
+date_example <- as.Date(txt)
+class(date_example)
+```
+```{r}
+my.state <- "Colorado"
+
+colorado <- covid_data %>%
+  filter(state == my.state) %>%
+  group_by(county) %>%
+  mutate(new_cases = cases - lag(cases),
+         new_deaths = deaths - lag(deaths)) %>%
+  ungroup()
+```
+
+```{r}
+filter(colorado, date == my.date) %>%
+  slice_max(cases, n = 5) %>%
+  select(Date = date, County = county, Cases = cases) %>%
+  flextable() %>%
+  set_caption (caption = "Most Total Cases")
+
+
+filter(colorado, date == my.date) %>%
+  slice_max(cases, n = 5) %>%
+  select(Date = date, County = county, Cases = new_cases) %>%
+  flextable() %>%
+  set_caption (caption = "Most New Cases")
+```
+
+
+## Question 3
+
+```{r}
+
+```
+
+## Question 4
+
+```{r}
+
+```
+
+## Question 5
+
+```{r}
+
+```
+
+## Question 6
+
+```{r}
+
+```
+
+## Question 7
+
+```{r}
+
+```
+
+## Question 8
+
+```{r}
+
+```
