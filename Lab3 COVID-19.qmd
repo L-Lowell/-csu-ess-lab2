@@ -45,14 +45,14 @@ colorado <- covid_data %>%
 ```
 
 ```{r}
-filter(colorado, date == my.date) %>%
+filter(colorado, date == date_example) %>%
   slice_max(cases, n = 5) %>%
   select(Date = date, County = county, Cases = cases) %>%
   flextable() %>%
   set_caption (caption = "Most Total Cases")
 
 
-filter(colorado, date == my.date) %>%
+filter(colorado, date == date_example) %>%
   slice_max(cases, n = 5) %>%
   select(Date = date, County = county, Cases = new_cases) %>%
   flextable() %>%
